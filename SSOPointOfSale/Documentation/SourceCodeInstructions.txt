@@ -1,0 +1,88 @@
+﻿Programming guidelines outline by Gordon Stevens
+-------------------------------------------------------------
+Ok so you're going to see some interesting things in my code,
+but I've outlined some of the conventions below
+-------------------------------------------------------------
+
+---> NuGet package manager:
+
+ When you need to extend the functionality of the project, you can add it through the "NuGet Package Manager" bulit into Visual Studio.
+ To access NuGet package manager, go to: TOOLS -> NuGet Package Manager -> Package -> Manage NuGet Packages for solution... - (Click!)
+ Under "Browse" tab, type in search box "mysql"
+
+
+---> Comments:
+
+/**
+ * Here is a comment about what the following
+ * function does!
+ */
+ 
+  
+ // This comment talks about what this block of statements do in a functions
+ statement 1
+ statement 2   // This statement talks about what happens on this line only
+ statement 3
+
+
+---> References to anything external
+
+ Sometimes we need stackoverflow or google or some obscure random blog site where a questionable fix is available. Since there are
+ multiple coders on this project, PLEASE PLEASE PLEASE leave references in comments where you invoke the code you found/changed
+
+ // REF (C# 6.0 Expression bodies with multiple lines) : http://stackoverflow.com/questions/5653703/can-a-c-sharp-lambda-expression-have-more-than-one-statement
+ private string ... .... ...() { ... }
+
+---> Regions (Used to hide blocks of code to make code more managable, and can be expanded/contracted with the '+' symbol beside the line number):
+
+ #region Procedures for button functionaliy
+ statement
+ statement
+ statement
+ ...
+ statement
+ #endregion
+
+
+---> Comming features:
+
+ Write pseudo-code if possible until database etc are ready to be implemented as per design class diagram
+
+
+ Lambda expression bodies (https://msdn.microsoft.com/en-us/library/bb397687.aspx):
+
+ public string doSomeThingsForFun(string meow1, string meow2) => meow1 + meow2;
+
+    is the same as
+
+ public string doSomeThingsForFun(string meow1, string meow2)
+ {
+	return meow1 + meow2; 
+ }
+
+
+---> Ternary operator
+
+ The ? operator is also great for shortening up some code
+ public string doSomeThingsForFun(int caffeineAmt, string meow1, string meow2)
+ {
+	return (caffeineAmt >= 99999) ? meow1 + meow2 : "Nope, the Caffeine Amount is not greater than 99999!"; 
+ }
+
+	which can be further added to a lambda expression body:
+
+ public string doSomeThingsForFun(int caffeineAmt, string meow1, string meow2) => (caffeineAmt >= 99999) ? meow1 + meow2 : "Nope, the Caffeine Amount is not greater than 99999!";
+
+
+---> Singletons
+
+ Normally, each time an object of the class is instantiated, it has certain scope within the project, and can exist as many times as
+ the computer running the program has memory and proper access to the class.
+ 
+ We need one customer at a time, one employee at a time, and they definitely need to be accessible from multiple forms (globally).
+ 
+ A singleton object is an object that is instantiated ONCE, and stays in the same spot in memory. If the singleton object does not 
+ already exist in memory, it is instantiated. If it is already instantiated, then the reference points back to the already existing
+ object. Singletons also exist in other languages such as Java, JavaScript, PHP, and more.
+
+ For more information on C# Singletons, visit: http://jonskeet.uk/csharp/singleton.html
